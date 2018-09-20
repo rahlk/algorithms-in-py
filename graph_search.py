@@ -26,8 +26,8 @@ def dfs(graph, start):
 
         # If the next node has not been seen before
         if next not in visited:
-            # Include the next in the visited list
-            visited.append(next)
+            # Add the next in the visited list
+            visited.add(next)
             # Add the adjacent nodes to the stack
             stack.extend(graph[next] - visited)
 
