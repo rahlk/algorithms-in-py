@@ -59,7 +59,7 @@ def bfs(graph, start):
     list
         Order of traversal in BFS 
     """
-
+    parent = {vtx: -1 for vtx in graph.keys()}
     visited = [start]  # Initialize visited
     queue = [start]  # Initialize traversal queue
     order = []  # Initialize order of traversal list
@@ -73,10 +73,19 @@ def bfs(graph, start):
             if v not in visited:  
                 # If the neighbor hasn't been visited, enqueue.
                 queue.append(v)
+                parent[v] = next_
 
     # Finally, return traversal order order.
-    return order
+    return order, parent
 
+
+def find_path(start, end, parent):
+    
+    if start == end or end == -1:
+        print(" <- {start}")
+    else:
+        print(" <- {end}")
+        find_path(start, parent[end], parent)
 
 def bfs_recr(graph, start):
     pass
@@ -91,7 +100,8 @@ if __name__ == "__main__":
         '3': ['3'],
     }
 
-    start = '2'
-    order = bfs(graph, start)
-
+    start = '1'
+    end = '3'
+    order, parent = bfs(graph, start)
     print(" -> ".join(order))
+    find_path(start, end, parent)
