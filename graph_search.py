@@ -1,3 +1,6 @@
+from pdb import set_trace
+
+
 def dfs(graph, start):
     """
     Perform a depth first search using stacks
@@ -16,7 +19,7 @@ def dfs(graph, start):
     """
 
     # Initialize visited node and stack
-    visited = set()
+    visited = []
     stack = [start]
 
     # Explore until the stack is empty
@@ -27,19 +30,52 @@ def dfs(graph, start):
         # If the next node has not been seen before
         if next not in visited:
             # Add the next in the visited list
-            visited.add(next)
+            visited.append(next)
             # Add the adjacent nodes to the stack
-            stack.extend(graph[next] - visited)
+            stack.extend(graph[next])
 
     # Return exploration order
     return visited
 
+
 def dfs_recr(graph, start):
-    pass
+        pass
 
 
 def bfs(graph, start):
-    pass
+    """
+    Breadth First Search that uses queues
+    
+    Parameters
+    ----------
+    graph: dict
+        A dictionary representing adjacency lists
+    start: str
+        A starting vertex
+
+    
+    Returns
+    -------
+    list
+        Order of traversal in BFS 
+    """
+
+    visited = [start]  # Initialize visited
+    queue = [start]  # Initialize traversal queue
+    order = []  # Initialize order of traversal list
+    
+    while len(queue): # Repeat until the queue is empty
+        next_ = queue.pop(0)  # Pop the leftmost element
+        order.append(next_)  # Append that to the traversal order list
+        visited.append(next_)  # Append that to the visited list
+        neigh = graph[next_]  # Obtain the neighbors of the current vertex
+        for v in neigh:
+            if v not in visited:  
+                # If the neighbor hasn't been visited, enqueue.
+                queue.append(v)
+
+    # Finally, return traversal order order.
+    return order
 
 
 def bfs_recr(graph, start):
@@ -48,16 +84,14 @@ def bfs_recr(graph, start):
 
 if __name__ == "__main__":
 
-    graph =  {
-        'A': set(['B', 'C']),
-        'B': set(['A', 'D', 'E']),
-        'C': set(['A', 'F']),
-        'D': set(['B']),
-        'E': set(['B', 'F']),
-        'F': set(['C', 'E'])
+    graph = {
+        '0': ['1', '2'],
+        '1': ['2'],
+        '2': ['0', '3'],
+        '3': ['3'],
     }
 
-    start = 'A'
-    order = dfs(graph, start)
+    start = '2'
+    order = bfs(graph, start)
 
-    print(order)
+    print(" -> ".join(order))
