@@ -88,12 +88,6 @@ def mergesort(raw_array):
     left = raw_array[:int(numel/2)]
     right = raw_array[int(numel/2):]
 
-    "It's possible that there is only one element, these must be lists"
-    if not isinstance(left, list):
-        left = list(left)
-    if not isinstance(right, list):
-        right = list(right)
-
     return _merge(mergesort(left), mergesort(right))
 
 

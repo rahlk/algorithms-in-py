@@ -6,9 +6,13 @@ class Heap:
     A Heap Datastructure    
     """
 
-    def __init__(self, array):
+    def __init__(self, array, alt_makeheap=True):
         self.items = []
-        self.fast_makeheap(array)
+        if alt_makeheap:
+            "Alternative makeheap that uses bubble down."
+            self.fast_makeheap(array)
+        else:
+            self.makeheap(array)
 
     def _left(self, idx):
         """
